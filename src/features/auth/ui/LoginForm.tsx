@@ -1,17 +1,19 @@
 'use client';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (username === 'admin' && password === 'password') {
       localStorage.setItem('token', 'fake-token');
       localStorage.setItem('role', 'Administrador');
-      window.location.href = '/dashboard';
+      router.push('/dashboard');
     } else {
       setError('Credenciales inválidas');
     }
